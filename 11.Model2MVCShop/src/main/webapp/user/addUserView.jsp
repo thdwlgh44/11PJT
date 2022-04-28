@@ -182,6 +182,7 @@
 		      	<strong class="text-danger">입력전 중복확인 부터..</strong>
 		      </span>
 		    </div>
+		    
 		    <div class="col-sm-3">
 		      <button type="button" class="btn btn-info">중복확인</button>
 		    </div>
@@ -192,6 +193,7 @@
 		    <div class="col-sm-4">
 		      <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호">
 		    </div>
+		    
 		  </div>
 		  
 		  <div class="form-group">
