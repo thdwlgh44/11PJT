@@ -13,78 +13,66 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<script type="text/javascript" src="../javascript/calendar.js"></script>
 
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
        body > div.container{
         	border: 3px solid #D6CDB7;
-            margin-top: 20px;
+            margin-top: 10px;
         }
     </style>
-
-<!-- CDN(Content Delivery Network) 호스트 사용, Javascript -->
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="../javascript/calendar.js"></script>
-
+    
+<!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
 
-function fncAddProduct(){
-	//Form 유효성 검증
- 	//var name = document.detailForm.prodName.value;
-	//var detail = document.detailForm.prodDetail.value;
-	//var manuDate = document.detailForm.manuDate.value;
-	//var price = document.detailForm.price.value;
 
-	var name=$("input[name='prodName']").val();
-	var detail=$("input[name='prodDetail']").val();
-	var manuDate=$("input[name='manuDate']").val();
-	var price=$("input[name='price']").val();
-	
-	if(name == null || name.length<1){
-		alert("상품명은 반드시 입력하여야 합니다.");
-		return;
-	}
-	if(detail == null || detail.length<1){
-		alert("상품상세정보는 반드시 입력하여야 합니다.");
-		return;
-	}
-	if(manuDate == null || manuDate.length<1){
-		alert("제조일자는 반드시 입력하셔야 합니다.");
-		return;
-	}
-	if(price == null || price.length<1){
-		alert("가격은 반드시 입력하셔야 합니다.");
-		return;
-	}
-
-	//document.detailForm.action='/product/addProduct';
-	//document.detailForm.submit();
-	$("form").attr("method" , "POST").attr("action" , "/product/addProduct").submit();
-}
-
-//===========================================//
-//==> 추가된부분 : "등록"  Event 연결
- $(function() {
-	 $( "button.btn.btn-primary" ).on("click" , function() {
-		fncAddProduct();
+	//===========================================//
+	//==> 추가된부분 : "등록"  Event 연결
+	$(function() {
+		$("button.btn.btn-primary").on("click", function() {
+			fncAddUser();
+		});
 	});
-});
 
-/*function resetData(){
-	document.detailForm.reset();
-}*/
-
-//==> 추가된부분 : "취소"  Event 처리 및  연결
-$(function() {
-	 $( "a[href='#' ]" ).on("click" , function() {
+	//==> 추가된부분 : "취소"  Event 처리 및  연결
+	$(function() {
+		$("a[href='#' ]").on("click", function() {
 			$("form")[0].reset();
+		});
 	});
-});	
 
+	function fncAddUser() {
+		
+		var name = $("input[name='prodName']").val();
+		var detail = $("input[name='prodDetail']").val();
+		var manuDate = $("input[name='manuDate']").val();
+		var price = $("input[name='price']").val();
+
+		if (name == null || name.length < 1) {
+			alert("상품명은 반드시 입력하여야 합니다.");
+			return;
+		}
+		if (detail == null || detail.length < 1) {
+			alert("상품상세정보는 반드시 입력하여야 합니다.");
+			return;
+		}
+		if (manuDate == null || manuDate.length < 1) {
+			alert("제조일자는 반드시 입력하셔야 합니다.");
+			return;
+		}
+		if (price == null || price.length < 1) {
+			alert("가격은 반드시 입력하셔야 합니다.");
+			return;
+		}
+
+		$("form").attr("method", "POST").attr("action", "/product/addProduct").submit();
+	}
 </script>
+
 </head>
 
-<body bgcolor="#ffffff" text="#000000">
+<body>
 
 <!-- ToolBar Start /////////////////////////////////////-->
 	<div class="navbar  navbar-default">
@@ -104,41 +92,43 @@ $(function() {
 		
 			<div class="form-group">
 		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="prodName" name="prodName" readonly>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="prodName" name="prodName">
 		       <span id="helpBlock" class="help-block"></span>
 		    </div>
+		   </div> 
 			
 			<div class="form-group">
 		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">상품상세정보</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="prodDetail" name="prodDetail" readonly>
-		       <span id="helpBlock" class="help-block">
-		      </span>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="prodDetail" name="prodDetail">
+		       <span id="helpBlock" class="help-block"></span>
 		    </div>
+		</div>
 		
 			<div class="form-group">
 		    <label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="manuDate" name="manuDate" readonly>
-		      &nbsp;<img src="../images/ct_icon_date.gif" width="15" height="15" 
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" name="manuDate" id="manuDate">
+		      <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
+		      <img src="../images/ct_icon_date.gif" width="15" height="15" 
 				onclick="show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value)"/>
-		       <span id="helpBlock" class="help-block">
-		      </span>
 		    </div>
+		   </div> 
 		
 			<div class="form-group">
 		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
-		    <div class="col-sm-4">
-		      <input type="number" class="form-control" id="price" name="price" readonly>
+		    <div class="col-sm-3">
+		      <input type="number" class="form-control" id="price" name="price">
 		       <span id="helpBlock" class="help-block">
 		      </span>
 		    </div>
+		   </div> 
 		
 			<div class="form-group">
 		    <label for="fileName" class="col-sm-offset-1 col-sm-3 control-label">상품이미지</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="fileName" name="fileName" readonly>
+		    <div class="col-sm-3"><!-- 입력칸 -->
+		      <input type="text" class="form-control" id="fileName" name="fileName" >
 		    </div>
 		  </div>
 		
@@ -155,8 +145,6 @@ $(function() {
 	<!--  화면구성 div end /////////////////////////////////////-->
 		
 		
-		
-		
-		
 </body>
+
 </html>
