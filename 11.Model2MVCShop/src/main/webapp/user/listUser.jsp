@@ -193,7 +193,7 @@
 			  <td align="left">${user.userName}</td>
 			  <td align="left">${user.email}</td>
 			  <td align="left">
-			  	<i class="glyphicon glyphicon-ok" id= "${user.userId}"></i>
+			  	<i class="glyphicon glyphicon-ok" id="${user.userId}"></i>
 			  	<input type="hidden" value="${user.userId}">
 			  </td>
 			</tr>

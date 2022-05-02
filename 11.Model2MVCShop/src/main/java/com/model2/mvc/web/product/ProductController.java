@@ -84,7 +84,7 @@ public class ProductController {
 	
 	//3.UpdateProductViewAction
 	//@RequestMapping("/updateProductView.do")
-	@RequestMapping( value="updateProductView", method=RequestMethod.GET )
+	@RequestMapping( value="updateProduct", method=RequestMethod.GET )
 	public String updateProductView( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
 
 		System.out.println("/product/updateProductView : GET");
@@ -100,13 +100,13 @@ public class ProductController {
 	//@RequestMapping("/updateProduct.do")
 	@RequestMapping( value="updateProduct", method=RequestMethod.POST )
 	public String updateProduct( @ModelAttribute("product") Product product , 
-													@RequestParam("manuDate") String manuDate, Model model , HttpSession session) throws Exception{
+								@RequestParam("manuDate") String manuDate) throws Exception{
 		product.setManuDate(manuDate.replace("-", ""));	
 		System.out.println("/product/updateProduct : POST");
 		//Business Logic
 		productService.updateProduct(product);
 		
-		return "redirect:/product/getProduct.do?prodNo="+product.getProdNo();
+		return "redirect:/product/getProduct?prodNo="+product.getProdNo();
 	}
 	
 	//5.ListProductAction

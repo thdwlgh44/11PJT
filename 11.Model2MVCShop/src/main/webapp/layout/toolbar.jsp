@@ -135,14 +135,17 @@
 		
 		//=============  魄概惑前包府 Event  贸府 =============	
 	 	$( "a:contains('魄概惑前包府')" ).on("click" , function() {
-	 		//==> DOM Object GET 3啊瘤 规过 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/product/listProduct?menu=${menu}");
+			$(self.location).attr("href","/product/listProduct?menu=manage");
 		});
 		
 		//=============  惑前备概 Event  贸府 =============	
 	 	$( "a:contains('惑 前 八 祸')" ).on("click" , function() {
-	 		//==> DOM Object GET 3啊瘤 规过 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			$(self.location).attr("href","/product/listProduct?menu=${menu}");
+			$(self.location).attr("href","/product/listProduct?menu=search");
+		});
+		
+		//=============  弥辟 夯 惑前 Event  贸府 =============	
+	 	$( "a:contains('弥辟夯惑前')" ).on("click" , function() {
+			$(self.location).attr("href","/product/listProduct?menu=manage");
 		});
 		
 	</script>  

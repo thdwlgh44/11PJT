@@ -42,7 +42,7 @@
 
 	function fncGetUserList(currentPage) {//pagenavigation때문에 GetUserList로 명명
 		$("#currentPage").val(currentPage)
-		$("form").attr("method" , "POST").attr("action" , "/product/listProduct?menu=${menu}").submit();
+		$("form").attr("method" , "POST").attr("action" , "/product/listProduct").submit();
 	};
 
 	 	//============= "검색"  Event  처리 =============
@@ -52,12 +52,12 @@
 			fncGetUserList(1);
 		 	});
 		});
-	
+		
 		//============= prodName 에 상품정보보기  Event  처리(Click) =============
 		$(function() {
 			
 		$( "td:nth-child(2)" ).on("click" , function() {
-			self.location ="/product/getProduct?prodNo="+$(this).data("param");
+			self.location ="/product/getProduct?prodNo="+$(this).attr("prodNo");
 		});
 			
 		//==> prodName LINK Event End User 에게 보일수 있도록 
@@ -67,15 +67,17 @@
 			
 			
 		//============= prodName 에 회원정보보기  Event  처리 (double Click)=============
+				
+			
 		$(function() {
 			
 		$( "td:nth-child(6)> i" ).on("click" , function() {
 			
-			var prodNo = $(this).data("param");
+			var prodNo = $(this).next().val();
 			
 				$.ajax( 
 						{
-							url : "/product/json/getProduct/"+prodNo ,
+							url : "/product/json/getProduct/"+prodNo,
 							method : "GET",
 							dataType : "json",
 							headers : {
@@ -92,17 +94,62 @@
 															+"제조일자 : "+JSONData.manuDate+"<br/>"															
 															+"가  격 : "+JSONData.price+"<br/>"
 															+"등록일 : "+JSONData.regDateString+"<br/>"
-															+"</h3>";
+															+"</h6>";
 								$("h6").remove();
-								$( "#"+prodNo+"" ).html(displayValue);
+								$( "#"+JSONData.prodNo+"" ).append(displayValue);
 						}
 					});
 				
 			});
+		
+		//==> prodNo LINK Event End User 에게 보일수 있도록 
+		$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
+		$("h7").css("color" , "red");
+		
 		//==> 아래와 같이 정의한 이유는 ??
 		$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 	});
+		
+		$(function() {
+			
+		$( "td:nth-child(6)> i" ).on("click" , function() {
+			
+			var prodNo = $(this).next.val();
+			
+				$.ajax( 
+						{
+							url : "/product/json/getProduct/"+prodNo,
+							method : "GET",
+							dataType : "json",
+							headers : {
+								"Accept" : "application/json",
+								"Content-Type" : "application/json"
+							},
+							success : function(JSONData , status) {
 
+								var displayValue = "<h3>"
+															+"상품번호 : "+JSONData.prodNo+"<br/>"
+															+"상품명 : "+JSONData.prodName+"<br/>"															
+															+"상품이미지 : "+JSONData.fileName+"<br/>"															
+															+"상품상세정보 : "+JSONData.prodDetail+"<br/>"															
+															+"제조일자 : "+JSONData.manuDate+"<br/>"															
+															+"가  격 : "+JSONData.price+"<br/>"
+															+"등록일 : "+JSONData.regDateString+"<br/>"
+															+"</h3>";
+								$("h3").remove();
+								$( "#"+JSONData.prodNo+"" ).append(displayValue);
+						}
+					});
+				
+			});
+		
+		//==> prodNo LINK Event End User 에게 보일수 있도록 
+		$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
+		$("h7").css("color" , "red");
+		
+		//==> 아래와 같이 정의한 이유는 ??
+		$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
+	});
 	 
 		</script>
 
@@ -185,12 +232,13 @@
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
-			  <td align="left" data-param="${product.prodNo}" title="Click : 상품정보 확인">${product.prodName}</td>
+			  <td align="left" prodNo="${product.prodNo}" title="Click : 상품정보 확인">
+			  ${product.prodName}</td>
 			  <td align="left">${product.price}</td>
 			  <td align="left">${product.regDateString}</td>
 			  <td align="left">${product.proTranCode}</td>
 			  <td align="left">
-			  	<i class="glyphicon glyphicon-ok" id= "${product.prodNo}"></i>
+			  	<i class="glyphicon glyphicon-ok" id="${product.prodNo}"></i>
 			  	<input type="hidden" value="${product.prodNo}">
 			  </td>
 			</tr>

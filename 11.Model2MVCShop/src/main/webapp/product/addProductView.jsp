@@ -88,7 +88,7 @@
 		<h1 class="bg-primary text-center">상 품 등 록</h1>
 		
 		<!-- form Start /////////////////////////////////////-->
-		<form class="form-horizontal">
+		<form class="form-horizontal" name="manuDateForm">
 		
 			<div class="form-group">
 		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상품명</label>
@@ -112,7 +112,7 @@
 		      <input type="text" class="form-control" name="manuDate" id="manuDate">
 		      <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
 		      <img src="../images/ct_icon_date.gif" width="15" height="15" 
-				onclick="show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value)"/>
+				onclick="show_calendar('document.manuDateForm.manuDate', document.manuDateForm.manuDate.value)"/>
 		    </div>
 		   </div> 
 		

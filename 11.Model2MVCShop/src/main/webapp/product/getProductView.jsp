@@ -35,12 +35,11 @@
 
 <script type="text/javascript">
 
-
 	//==> 추가된부분 : "수정" Event 연결 및 처리
 	$(function() {
 
 		$("button").on("click", function() {
-			self.location = "/product/updateProductView?prodNo=${product.prodNo}"
+			self.location = "/product/updateProduct?prodNo=${product.prodNo}"
 		});
 		
 	});

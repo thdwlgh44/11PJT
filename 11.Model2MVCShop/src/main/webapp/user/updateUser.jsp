@@ -42,7 +42,6 @@ body {
 <script type="text/javascript">
 	//============= "수정"  Event 연결 =============
 	$(function() {
-		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("button.btn.btn-primary").on("click", function() {
 			fncUpdateUser();
 		});

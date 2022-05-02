@@ -22,39 +22,70 @@
    
     <!-- Bootstrap Dropdown Hover JS -->
    <script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-   <script src="../javascript/calendar.js"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style>
-		body {
-            padding-top : 50px;
-        }
-    </style>
+	body {
+		padding-top: 50px;
+	}
+	
+	</style>
+    
+
     
      <!--  ///////////////////////// JavaScript ////////////////////////// -->
 <script type="text/javascript">
+		
+	function fncUpdateProduct() {
+
+		$("form").attr("method", "POST").attr("action",
+				"/product/updateProduct").submit();
+	}
+
+	//==> 추가된부분 : "수정"  Event 연결
+	$(function() {
+		$("button.btn.btn-primary").on("click", function() {
+			fncUpdateProduct();
+		});
+	});
+
+	//==> 추가된부분 : "취소"  Event 연결 및 처리
+	$(function() {
+		$("a[href='#' ]").on("click", function() {
+			$("form")[0].reset();
+		});
+	});
 	
-		function fncUpdateProduct() {
-
-			$("form").attr("method", "POST").attr("action", "/product/updateProduct").submit();
-		}
-		
-		//==> 추가된부분 : "수정"  Event 연결
-		$(function() {
-			$("button.btn.btn-primary").on("click", function() {
-				fncUpdateProduct();
-			});
+	$(function (){
+		/*    ：startView: 2,
+		 maxViewMode: 1,
+		 minViewMode:1,
+		      ，           ，0  ，1  ，2  ，
+		              ，
+		            。          。
+		*/
+		  //     startView: 4, minView: 4, format: 'yyyy', 
+		$('.form_date').datetimepicker({
+		format: 'yyyy', 
+		startView:4, 
+		minView:4,
+		language: 'zh-CN' ,
+		forceParse: false, 
+		autoclose:true,
+		  pickerPosition: "bottom-left" 
+		  });
+		 //      
+		  $('.form_date').datetimepicker({
+		  language: 'zh-CN',
+		  minView: 'month', 
+		  format: 'yyyy-mm-dd',
+		  autoclose: true,
+		 startView: 2,
+		  showMeridian: 1,
+		  pickerPosition: "bottom-left"
+		 });
 		});
-
-		//==> 추가된부분 : "취소"  Event 연결 및 처리
-		$(function() {
-			$("a[href='#' ]").on("click", function() {
-				$("form")[0].reset();
-			});
-		});
-		
-		
-	</script>
+</script>
 	
 </head>
 
@@ -78,6 +109,14 @@
 		<form class="form-horizontal">
 
 			<div class="form-group">
+				<label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상품번호</label>
+				<div class="col-sm-4">
+					<input type="prodNo" class="form-control" id="prodNo" name="prodNo" 
+						value="${product.prodNo}">
+				</div>
+			</div>
+
+			<div class="form-group">
 				<label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상 품 명</label>
 				<div class="col-sm-4">
 					<input type="prodName" class="form-control" id="prodName" name="prodName" 
@@ -88,9 +127,8 @@
 			<div class="form-group">
 				<label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">상품상세정보</label>
 				<div class="col-sm-4">
-					<input type="text" class="form-control" id="prodDetail"
-						name="prodDetail" value="${product.prodDetail}">
-						
+					<input type="text" class="form-control" id="prodDetail" name="prodDetail" 
+						value="${product.prodDetail}">
 				</div>
 			</div>
 
@@ -99,11 +137,9 @@
 				<div class="col-sm-4">
 					<input type="text" class="form-control" id="manuDate" name="manuDate"
 						value="${product.manuDate}">&nbsp;
-						<img src="../images/ct_icon_date.gif" width="15" height="15" 
-									onclick="show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value)"/>
 				</div>
 			</div>
-
+			
 			<div class="form-group">
 				<label for="price" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
 				<div class="col-sm-4">
