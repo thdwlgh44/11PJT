@@ -57,7 +57,11 @@
 		$(function() {
 			
 		$( "td:nth-child(2)" ).on("click" , function() {
-			self.location ="/product/getProduct?prodNo="+$(this).attr("prodNo");
+			if(${param.menu == 'manage'}) {
+				self.location ="/product/getProduct?prodNo="+$(this).attr("prodNo");
+			} else {
+				self.location ="/product/readProduct?prodNo="+$(this).attr("prodNo");
+			}
 		});
 			
 		//==> prodName LINK Event End User 에게 보일수 있도록 
